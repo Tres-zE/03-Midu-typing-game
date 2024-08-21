@@ -1,0 +1,48 @@
+<!-- todo lo haremos en una solo hoja -->
+ <title>Monkey Type Clone - Test your typing skills! =</title>
+
+ <style>
+    :root {
+        color-scheme: light dark;
+        --green: #00b755;
+        --yelow: #daaf38;
+        --red: #ca4754;
+        --black: #222;
+        --gray: #999;
+    }
+
+    body {
+        background: var(--black);
+        font-family: Menlo, monospace;
+        display: grid;
+        padding: 32px;
+        justify-content: center;
+        margin-top: 32px;
+    }
+ </style>
+
+ <body>
+    <main>
+        <section id="game">
+            <time>30</time>
+            <p></p>
+            <!-- el input es para hacer toda la magia -->
+            <input autofocus>  
+        </section>
+    </main>
+ </body>
+
+ <script>
+    //recuperamos las etiquetas con document.querySelector
+    /*
+    Al utilizar el símbolo $ en el nombre de una variable, estamos indicando que esa variable tiene un propósito especial y está relacionada con funciones o elementos del DOM.
+    En resumen, el símbolo $ es una herramienta poderosa para simplificar la manipulación de elementos HTML y mejorar la eficiencia en tu código JavaScript.
+    */
+    const $time = document.querySelector('time');
+    const $paragraph = document.querySelector('p');
+    const $input = document.querySelector('input');
+
+    const INITIAL_TIME = 30;
+
+    const TEXT = 'the quick brown fox jumps over the lazy dog and midudev is trying clone of monkey type for fun and profit using vanilla js for the typing test speed'
+ </script>
