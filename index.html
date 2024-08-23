@@ -24,7 +24,7 @@
  <body>
     <main>
         <section id="game">
-            <time>30</time>
+            <time></time>
             <p></p>
             <!-- el input es para hacer toda la magia -->
             <input autofocus>  
@@ -44,5 +44,40 @@
 
     const INITIAL_TIME = 30;
 
-    const TEXT = 'the quick brown fox jumps over the lazy dog and midudev is trying clone of monkey type for fun and profit using vanilla js for the typing test speed'
+    const TEXT = 'the quick brown fox jumps over the lazy dog and midudev is trying clone of monkey type for fun and profit using vanilla js for the typing test speed';
+
+    let words = [];//esto esta en datos.js
+    let currentTime = INITIAL_TIME;
+
+    initGame();
+    initEvents();
+
+    function initGame() {
+        /*
+            el metodo split se utiliza para dividir una cadena de texto en un arreglo de subcadenas basandose en un separador en especifico.
+            el metodo slice se utiliza para extraer una porcion de un arreglo o cadena de texto y retornarla como un nuevo arreglo o cadena.
+            
+            ESTO SE PUEDE VER AL INSPECCIONAR EL CODIGO
+        */
+        words = TEXT.split(' ').slice(0, 32);
+        //esto lo que hace es que cada vez que se reinicia el juego empiece con el INITIAL_TIME
+        currentTime = INITIAL_TIME;
+        //renderizamos el tiempo
+        $time.textContent = currentTime;
+        //ahora rellenamos p con texto
+        $paragraph.innerHTML = words.map((word, index) => {
+            const letters = word.split('');
+            /*
+                creamos una etiqueta palabra y dentro de ella le estamos metiendo c/u de las letras, las mapeamos y el join lo que hace es quitar la coma. Con esto nos debe de aparecer el texto
+            */
+            return `<word>
+                ${letters
+                    .map(letter => `<letter>${letter}</letter>`)
+                    .join('')
+                }
+            </word>`
+        }).join('');
+    };
+
+    function initEvents() {};
  </script>
