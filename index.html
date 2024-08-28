@@ -19,6 +19,35 @@
         justify-content: center;
         margin-top: 32px;
     }
+
+    section {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-width: 500px;
+    }
+
+    time {
+        color: var(--yelow);
+    }
+
+    input {
+        /*para oucltar el input en la parte superior izquierda*/
+        z-index: -999;
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        /*opacity: 0;*/
+    }
+
+    p {
+        /*esto es para tener un mejor control al separar el texto*/
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3px 8px;
+    }
  </style>
 
  <body>
@@ -71,11 +100,15 @@
                 creamos una etiqueta palabra y dentro de ella le estamos metiendo c/u de las letras, las mapeamos y el join lo que hace es quitar la coma. Con esto nos debe de aparecer el texto
             */
             return `<word>
+                
                 ${letters
                     .map(letter => `<letter>${letter}</letter>`)
                     .join('')
                 }
             </word>`
+            /*
+                la etiqueta word la creamos, esto se puede hacer y es válido ya que a esto se le llama customElements. Incluso puede quedar asi: x-word
+            */
         }).join('');
     };
 
