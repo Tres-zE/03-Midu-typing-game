@@ -24,7 +24,7 @@
         padding: 16px;
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 4px;
         max-width: 500px;
     }
 
@@ -47,6 +47,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 3px 8px;
+        margin: 0;
     }
  </style>
 
@@ -110,7 +111,20 @@
                 la etiqueta word la creamos, esto se puede hacer y es válido ya que a esto se le llama customElements. Incluso puede quedar asi: x-word
             */
         }).join('');
+
+        //Creando el timer
+        const intervalId = setInterval(() => {
+            currentTime--//para hacer la cuenta regresiva
+            $time.textContent = currentTime;
+            //para evitar un bucle infinito y restaurar el contador
+            if (currentTime === 0) {
+                clearInterval(intervalId);
+                gameOver();
+            }
+        }, 1000)
     };
 
     function initEvents() {};
+
+    function gameOver () {};
  </script>
