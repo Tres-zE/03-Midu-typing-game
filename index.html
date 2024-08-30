@@ -49,6 +49,32 @@
         gap: 3px 8px;
         margin: 0;
     }
+
+    /*mostrando palabras activas*/
+    letter {
+        color: var(--gray);
+        position: relative;
+
+        &.active::before {
+            content: '|';
+            color: var(--yelow);
+            font-size: 15px;
+            position: absolute;
+            left: -65%;
+            animation: 1s blink infinite ease-in-out;
+        }
+    }
+    /*parpadeo del cursor*/
+    @keyframes blink {
+        0%, 25% {
+            opacity: 1;
+        }
+
+        75% {
+            opacity: 0;
+        }
+    }
+
  </style>
 
  <body>
@@ -111,6 +137,11 @@
                 la etiqueta word la creamos, esto se puede hacer y es válido ya que a esto se le llama customElements. Incluso puede quedar asi: x-word
             */
         }).join('');
+
+        //mostrar la primera palabra activa
+        const $firstWord = $paragraph.querySelector('word');
+        $firstWord.classList.add('active');
+        $firstWord.querySelector('letter').classList.add('active');
 
         //Creando el timer
         const intervalId = setInterval(() => {
