@@ -155,7 +155,34 @@
         }, 1000)
     };
 
-    function initEvents() {};
+    function initEvents() {
+        //agregaremos el evento del keydown para que detecte el teclado
+        document.addEventListener('keydown', () => {
+            $input.focus()
+        })
+        $input.addEventListener('keydown', onKeyDown)
+        $input.addEventListener('keyup', onKeyUp)
+    };
+
+    function onKeyDown () {};
+
+    function onKeyUp () {
+        //recuperamos los elementos actuales
+        const $currentWord = $paragraph.querySelector('word.active')//palabra activa
+        const $currentLetter = $currentWord.querySelector('letter.active')//letra activa
+        const currentWord = $currentWord.innerText.trim()//para eliminar espacios innecesarios en el texto
+        //limitaremos la cantidad de letras que se pueda escribir en el input
+        $input.maxLength = currentWord.lenght;
+        console.log({ value: $input.value, currentWord });
+
+        //comparamos la letra que se esta escribiendo con la del texto
+        $input.value.split('').forEach((char, index) => {
+            const $letter = $currentWord.querySelectorAll('letter')[index]
+
+            $currentWord.querySelector(`letter:nth-child(${index + 1})`)
+        })
+
+    };
 
     function gameOver () {};
  </script>
