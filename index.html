@@ -175,11 +175,18 @@
         $input.maxLength = currentWord.lenght;
         console.log({ value: $input.value, currentWord });
 
+        const $allLetters = $currentWord.querySelectorAll('letter');
+        //limpiamos el correct - incorret
+        $allLetters.forEach($letter => $letter.classList.remove('correct', 'incorrect'))
+
         //comparamos la letra que se esta escribiendo con la del texto
         $input.value.split('').forEach((char, index) => {
-            const $letter = $currentWord.querySelectorAll('letter')[index]
+            const $letter = $allLetters[index];
+            const letterToCheck = currentWord[index];
 
-            $currentWord.querySelector(`letter:nth-child(${index + 1})`)
+            const isCorrect = char === letterToCheck;
+            const letterClass = isCorrect ? 'correct' : 'incorrect';
+            $letter.classList.add(letterClass)
         })
 
     };
