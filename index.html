@@ -158,36 +158,34 @@
     function initEvents() {
         //agregaremos el evento del keydown para que detecte el teclado
         document.addEventListener('keydown', () => {
-            $input.focus()
+            $input.focus();
         })
         $input.addEventListener('keydown', onKeyDown)
         $input.addEventListener('keyup', onKeyUp)
     };
 
-    function onKeyDown () {};
+    function onKeyDown() {};
 
-    function onKeyUp () {
+    function onKeyUp() {
         //recuperamos los elementos actuales
         const $currentWord = $paragraph.querySelector('word.active')//palabra activa
         const $currentLetter = $currentWord.querySelector('letter.active')//letra activa
-        const currentWord = $currentWord.innerText.trim()//para eliminar espacios innecesarios en el texto
-        //limitaremos la cantidad de letras que se pueda escribir en el input
-        $input.maxLength = currentWord.lenght;
-        console.log({ value: $input.value, currentWord });
 
-        const $allLetters = $currentWord.querySelectorAll('letter');
-        //limpiamos el correct - incorret
+        const currentWord = $currentWord.innerText.trim()//limpiamos espacios innecesarios
+        $input.maxLength = currentWord.length
+
+        const $allLetters = $currentWord.querySelectorAll('letter')
+
         $allLetters.forEach($letter => $letter.classList.remove('correct', 'incorrect'))
 
-        //comparamos la letra que se esta escribiendo con la del texto
         $input.value.split('').forEach((char, index) => {
-            const $letter = $allLetters[index];
-            const letterToCheck = currentWord[index];
+        const $letter = $allLetters[index]
+        const letterToCheck = currentWord[index]
 
-            const isCorrect = char === letterToCheck;
-            const letterClass = isCorrect ? 'correct' : 'incorrect';
-            $letter.classList.add(letterClass)
-        })
+        const isCorrect = char === letterToCheck
+        const letterClass = isCorrect ? 'correct' : 'incorrect'
+        $letter.classList.add(letterClass)
+    })
 
     };
 
