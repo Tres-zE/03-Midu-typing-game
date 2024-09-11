@@ -175,13 +175,13 @@
     function onKeyDown() {};
 
     function onKeyUp() {
-        //recuperamos los elementos actuales
+        //recuperamos los elementos actuales, .active lo checamos en la consola
         const $currentWord = $paragraph.querySelector('word.active')//palabra activa
         const $currentLetter = $currentWord.querySelector('letter.active')//letra activa
 
         const currentWord = $currentWord.innerText.trim()//limpiamos espacios innecesarios
         $input.maxLength = currentWord.length
-
+        //lo podemos ver en la consola
         const $allLetters = $currentWord.querySelectorAll('letter')
 
         $allLetters.forEach($letter => $letter.classList.remove('correct', 'incorrect'))
@@ -194,6 +194,13 @@
         const letterClass = isCorrect ? 'correct' : 'incorrect'
         $letter.classList.add(letterClass)
     })
+    //MOVEMOS EL CURSOR
+    //primero la palabra activa la removemos
+    $currentLetter.classList.remove('active')
+    //ahora movemos el cursor
+    const inputLength = $input.value.length
+    $allLetters[inputLength].classList.add('active')
+    //nos dara un error y lo podemos ver en la consola
 
     };
 
