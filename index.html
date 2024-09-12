@@ -63,6 +63,10 @@
             left: -65%;
             animation: 1s blink infinite ease-in-out;
         }
+        /* para que el cursor quede a la derecha de cada palabra*/
+        &.active.is-last {
+            left: 65%;
+        }
         /* estilando las letras para el UX */
         &.correct {
             color: var(--green);
@@ -101,6 +105,7 @@
     /*
     Al utilizar el símbolo $ en el nombre de una variable, estamos indicando que esa variable tiene un propósito especial y está relacionada con funciones o elementos del DOM.
     En resumen, el símbolo $ es una herramienta poderosa para simplificar la manipulación de elementos HTML y mejorar la eficiencia en tu código JavaScript.
+    En pocas palabras en un elemento del DOM
     */
     const $time = document.querySelector('time');
     const $paragraph = document.querySelector('p');
@@ -197,10 +202,16 @@
     //MOVEMOS EL CURSOR
     //primero la palabra activa la removemos
     $currentLetter.classList.remove('active')
-    //ahora movemos el cursor
+    //ahora movemos el cursor despues de esto nos dara un error y lo podemos ver en la consola, esto se debe a que el cursor no sabe que letra sigue
     const inputLength = $input.value.length
-    $allLetters[inputLength].classList.add('active')
-    //nos dara un error y lo podemos ver en la consola
+    const $nextActiveLetter = $allLetters[inputLength]
+    
+    if ($nextActiveLetter) {
+        $nextActiveLetter.classList.add('active')
+    } else {
+        $currentLetter.classList.add('active', 'is-last')
+    }
+    
 
     };
 
