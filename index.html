@@ -177,7 +177,29 @@
         $input.addEventListener('keyup', onKeyUp)
     };
 
-    function onKeyDown() {};
+    function onKeyDown(event) {
+        //siguiente palabra despues de presionar space
+        const $currentWord = $paragraph.querySelector('word.active')
+        const $currentLetter = $currentWord.querySelector('letter.active')
+
+        const { key } = event
+        if (key === ' ') {
+            event.preventDefault()
+
+            //para que pase a la siguiente palabra
+            const $nextWord = $currentWord.nextElementSibling
+            //para la siguiente letra
+            const $nextLetter = $nextWord.querySelector('letter')
+            //quitamos las clases
+            $currentWord.classList.remove('active')
+            $currentLetter.classList.remove('active')
+            //agregamos las clases
+            $nextWord.classList.add('active')
+            $nextLetter.classList.add('active')
+            //evaluamos en espacio 
+            $input.value = ''
+        }
+    };
 
     function onKeyUp() {
         //recuperamos los elementos actuales, .active lo checamos en la consola
@@ -201,7 +223,7 @@
     })
     //MOVEMOS EL CURSOR
     //primero la palabra activa la removemos
-    $currentLetter.classList.remove('active')
+    $currentLetter.classList.remove('active', 'is-last')
     //ahora movemos el cursor despues de esto nos dara un error y lo podemos ver en la consola, esto se debe a que el cursor no sabe que letra sigue
     const inputLength = $input.value.length
     const $nextActiveLetter = $allLetters[inputLength]
