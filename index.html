@@ -76,6 +76,16 @@
             color: var(--red);
         }
     }
+
+    /*esto es para marcar el error del usuario*/
+    word {
+        border-bottom: 1.5px solid transparent;
+        transition: border-color 0.3s ease-in-out;
+
+        &.marked {
+            border-color: var(--red);
+        }
+    }
     /*parpadeo del cursor*/
     @keyframes blink {
         0%, 25% {
@@ -191,13 +201,18 @@
             //para la siguiente letra
             const $nextLetter = $nextWord.querySelector('letter')
             //quitamos las clases
-            $currentWord.classList.remove('active')
+            $currentWord.classList.remove('active', 'marked')
             $currentLetter.classList.remove('active')
             //agregamos las clases
             $nextWord.classList.add('active')
             $nextLetter.classList.add('active')
             //evaluamos en espacio 
             $input.value = ''
+            //para marcar el error cuando el usuario se equivoque
+            const hasMissedLetters = $currentWord.querySelectorAll('letter:not(.correct)').length > 0
+            
+            const classToAdd = hasMissedLetters ? 'marked' : 'correct'
+            $currentWord.classList.add(classToAdd)
         }
     };
 
