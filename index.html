@@ -213,6 +213,24 @@
             
             const classToAdd = hasMissedLetters ? 'marked' : 'correct'
             $currentWord.classList.add(classToAdd)
+            return
+        }
+
+        if (key === 'Backspace') {
+            //para que regrese a la palabra anterior
+            const $prevWord = $currentWord.previousElementSibling
+            //para la letra anterior
+            const $prevLetter = $currentLetter.previousElementSibling
+
+            if (!$prevWord && !$prevLetter) {
+                event.preventDefault()
+                return
+            }
+
+            // if (!$prevLetter) {
+            //     event.preventDefault()
+            //     const $wordMarked = $paragraph.querySelector('word.marked')
+            // }
         }
     };
 
