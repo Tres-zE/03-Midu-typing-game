@@ -227,10 +227,17 @@
                 return
             }
 
-            // if (!$prevLetter) {
-            //     event.preventDefault()
-            //     const $wordMarked = $paragraph.querySelector('word.marked')
-            // }
+            const $wordMarked = $paragraph.querySelector('word.marked')
+            if ($wordMarked && !$prevLetter) {
+                event.preventDefault()
+                $prevWord.classList.remove('marked')
+                $prevWord.classList.add('active')
+
+                const $letterToGo = $prevWord.querySelector('letter:last-child')
+
+                $currentWord.classList.remove('active')
+                $letterToGo.classList.add('active')
+            }
         }
     };
 
