@@ -237,6 +237,15 @@
 
                 $currentWord.classList.remove('active')
                 $letterToGo.classList.add('active')
+
+                //nos da un ligero problema ya que si se equivoca el usuario y le damos para atras nos regresa al principio de la palabra,tambien interfiere el input, para solucionarlo hacemos lo siguiente:
+                $input.value = [
+                    //los (...) se llaman operador de propagacion o rest operator, es un operador versatil que facilita la manipulacion de arrays, objetos y parametros de funciones. En este caso convertiremos el querySelectorAll en un array,por eso se usan los []
+                    ...$prevWord.querySelectorAll('letter.correct, letter.incorrect')
+                ].map($el => {
+                    return $el.classList.contains('correct') ? $el.innerText : '*' 
+                }) 
+                .join('')
             }
         }
     };
