@@ -99,7 +99,7 @@
 
     /* game over */
     #game {
-        display: grid;
+        display: flex;
     }
 
     #results{
@@ -123,7 +123,8 @@
     </main>
  </body>
 
- <script>
+ <script type="module">
+    import { words as INITIAL_WORDS } from './datos.js'
     //recuperamos las etiquetas con document.querySelector
     /*
     Al utilizar el símbolo $ en el nombre de una variable, estamos indicando que esa variable tiene un propósito especial y está relacionada con funciones o elementos del DOM.
@@ -136,7 +137,7 @@
 
     const INITIAL_TIME = 30;
 
-    const TEXT = 'the quick brown fox jumps over the lazy dog and midudev is trying clone of monkey type for fun and profit using vanilla js for the typing test speed';
+    // const TEXT = 'the quick brown fox jumps over the lazy dog and midudev is trying clone of monkey type for fun and profit using vanilla js for the typing test speed';
 
     let words = [];//esto esta en datos.js
     let currentTime = INITIAL_TIME;
@@ -150,8 +151,11 @@
             el metodo slice se utiliza para extraer una porcion de un arreglo o cadena de texto y retornarla como un nuevo arreglo o cadena.
             
             ESTO SE PUEDE VER AL INSPECCIONAR EL CODIGO
-        */
-        words = TEXT.split(' ').slice(0, 32);
+        
+        words = TEXT.split(' ').slice(0, 32);*/
+        words = INITIAL_WORDS.toSorted(
+            () => Math.random() - 0.5
+        ).slice(0, 32)
         //esto lo que hace es que cada vez que se reinicia el juego empiece con el INITIAL_TIME
         currentTime = INITIAL_TIME;
         //renderizamos el tiempo
