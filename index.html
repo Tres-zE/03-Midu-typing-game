@@ -120,6 +120,25 @@
         color: var(--yelow);
     }
 
+    button {
+        background: transparent;
+        font-weight: 400;
+        border: 0;
+        margin-top: 32px;
+        padding: 8px;
+        opacity: .4;
+        display: inline-block;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        cursor: pointer;
+        border-radius: 16px;
+
+        &:hover {
+            background: #444;
+            opacity: 1;
+            scale: 130%;
+        }
+    }
+
  </style>
 
  <body>
@@ -133,10 +152,24 @@
         <!-- trabajando con el game over -->
         <section id="results">
             <h2>ppm</h2>
-            <h3></h3>
+            <h3 id="results-wpm"></h3>
 
             <h2>accuracy</h2>
-            <h3></h3>
+            <h3 id="results-accuracy"></h3>
+
+            <button id="reload-button"><svg 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                stroke-width="1.5" 
+                stroke="currentColor" 
+                fill="none" 
+                stroke-linecap="round" 
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M19.933 13.041a8 8 0 1 1 -9.925 -8.788c3.899 -1 7.935 1.007 9.425 4.747" />
+                <path d="M20 4v5h-5" />
+              </svg></button>
         </section>
     </main>
  </body>
@@ -154,9 +187,10 @@
     const $input = document.querySelector('input');
     const $game = document.querySelector('#game');
     const $results = document.querySelector('#results');
-    const $wpm = $results.querySelector('h3');
-    const $accuracy = $results.querySelector('h3:last-child');
-    const INITIAL_TIME = 3;
+    const $wpm = $results.querySelector('#results-wpm');
+    const $accuracy = $results.querySelector('#results-accuracy');
+    const INITIAL_TIME = 30;
+    const $button = document.querySelector('#reload-button')
 
     // const TEXT = 'the quick brown fox jumps over the lazy dog and midudev is trying clone of monkey type for fun and profit using vanilla js for the typing test speed';
 
@@ -167,6 +201,11 @@
     initEvents();
 
     function initGame() {
+        //para que reinicie el juego
+        $game.style.display = 'flex';
+        $results.style.display = 'none'
+        //para que el input quede limpio del juego anterior
+        $input.value = '';
         /*
             el metodo split se utiliza para dividir una cadena de texto en un arreglo de subcadenas basandose en un separador en especifico.
             el metodo slice se utiliza para extraer una porcion de un arreglo o cadena de texto y retornarla como un nuevo arreglo o cadena.
@@ -223,6 +262,8 @@
         })
         $input.addEventListener('keydown', onKeyDown)
         $input.addEventListener('keyup', onKeyUp)
+        //para reiniciar el juego
+        $button.addEventListener('click', initGame)
     };
 
     function onKeyDown(event) {
@@ -335,7 +376,7 @@
         const totalLetters = correctLetter + incorrectLetter;
         const accuracy = totalLetters > 0 ? (correctLetter / totalLetters) * 100 : 0;
 
-        const wpm = correctWords * 60 / 10;
+        const wpm = correctWords * 60 / INITIAL_TIME;
         $wpm.textContent = wpm;
         $accuracy.textContent = `${accuracy.toFixed(2)}%`
     };
